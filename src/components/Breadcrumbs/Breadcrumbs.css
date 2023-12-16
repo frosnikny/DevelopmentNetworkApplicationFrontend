@@ -1,0 +1,33 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+#path-name {
+    color: white;
+}
+
+.breadcrumbs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    font-size: 18px;
+}
+
+.breadcrumb-item {
+    margin-right: 10px;
+
+    text-decoration: none;
+}
+
+.breadcrumb-item:last-child {
+    font-weight: bold;
+}
+
+.breadcrumb-item:not(:last-child):after {
+    content: '>';
+    margin-left: 10px;
+    color: #777;
+}

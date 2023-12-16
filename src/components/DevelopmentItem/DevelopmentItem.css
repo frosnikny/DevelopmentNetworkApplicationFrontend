@@ -1,0 +1,167 @@
+body {
+    background-color: #2D384A;
+}
+
+.many-cards .card {
+    margin: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 5px;
+    width: 100%;
+    background-color: #000218;
+    margin-bottom: 20px;
+}
+
+.nav-container {
+    color: #fafafa;
+    list-style-type: none;
+    margin-left: 50%;
+}
+
+.nav-container > li > a {
+    text-decoration: none;
+    color: #fafafa;
+}
+
+
+.search {
+    display: flex;
+    margin-right: 5%;
+    margin-top: 10px;
+    justify-content: right;
+}
+
+.search-input {
+    padding: 2px;
+    width: 65%;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.submit-button {
+    /*display: block;*/
+    width: 70px;
+    font-weight: 400;
+    font-size: 15px;
+    background-color: #fafafa;
+    color: #FF4C2B;
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #FF4C2B;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-button:hover {
+    border: 1px solid #FF4C2B;
+    background-color: #FF4C2B;
+    color: #fff;
+}
+
+.card {
+    background-color: #000218;
+    width: 225px;
+    min-height: 350px;
+    box-shadow: 4px 4px 4px rgba(255, 255, 255, 0.37);
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    transition: 0.2s;
+    position: relative;
+}
+
+.card:hover {
+    box-shadow: 8px 8px 8px #FF4C2B;
+}
+
+.card__top {
+    flex: 0 0 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card__image {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card__image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.2s;
+    border-radius: 4px 4px;
+}
+
+.card__image:hover > img {
+    transform: scale(1.1);
+}
+
+.card__prices {
+    display: flex;
+}
+
+.card__price::after {
+    content: "₽";
+    margin-left: 4px;
+    position: relative;
+}
+
+.card__price--discount {
+    font-weight: 700;
+    font-size: 19px;
+    color: #e0e0e0;
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+.card__bottom {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    padding: 10px;
+}
+
+.card__title {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 150%;
+    color: #e0e0e0;
+}
+
+.card__title:hover {
+    color: #ff6633;
+}
+
+.card__add {
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    font-size: 17px;
+    background-color: #fafafa;
+    color: #FF4C2B;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #FF4C2B;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: auto;
+}
+
+.card__add:hover {
+    border: 1px solid #FF4C2B;
+    background-color: #FF4C2B;
+    color: #fff;
+}

@@ -9,6 +9,6 @@ export default defineConfig({
             '/api': 'http://localhost:8080',
         }
     },
-    base: "/DevelopmentFront/",
+    base: "/DevelopmentNetworkApplicationFrontend/",
     plugins: [react()]
 })

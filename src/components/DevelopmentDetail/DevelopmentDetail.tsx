@@ -38,8 +38,7 @@ const DevelopmentDetail: FC = () => {
                     <hr/>
                     <p className="card-details__description">{dev?.Description}</p>
                     <div className="card-details__cost">
-                        <p><b>Детальная стоимость:</b></p>
-                        <pre>{dev?.DetailedPrice}</pre>
+                        <p><b>Цена за один день работы:</b> {dev?.DetailedPrice}</p>
                     </div>
                 </div>
             </div>

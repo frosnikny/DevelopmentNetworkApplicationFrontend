@@ -10,7 +10,7 @@ function NavigationBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Item>
-                            <Link to="/courses" className="nav-link ps-0">Курсы</Link>
+                            <Link to="/courses" className="nav-link ps-0">Услуги по разработке</Link>
                         </Nav.Item>
                         {/*<Nav.Item>*/}
                         {/*    <Link to="/" className="nav-link">Soon</Link>*/}

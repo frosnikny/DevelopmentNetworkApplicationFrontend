@@ -1,0 +1,40 @@
+.custom-table-container {
+    overflow-x: auto;
+}
+
+.custom-table {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%; /* Set maximum width to 100% */
+
+    th, td {
+        white-space: nowrap;
+        min-width: 100px;
+        box-sizing: border-box;
+    }
+
+    th {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    tbody tr:hover {
+        background-color: #e2e6ea;
+    }
+
+    td {
+        padding: 8px;
+    }
+
+    @media (max-width: 767px) {
+        th, td {
+            font-size: 12px;
+            min-width: unset;
+        }
+    }
+}

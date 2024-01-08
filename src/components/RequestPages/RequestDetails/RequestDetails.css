@@ -1,0 +1,13 @@
+/* styles.css */
+
+.full-width-container {
+    width: 100%;
+    max-width: 800px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+.card-body img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

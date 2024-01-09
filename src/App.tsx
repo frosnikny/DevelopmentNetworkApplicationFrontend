@@ -10,6 +10,8 @@ import {useAppSelector} from "./hooks/redux.ts";
 import LoadAnimation from "./components/Helpers/Popup/LoadAnimation.tsx";
 import MyComponent from "./components/Helpers/Popup/Popover.tsx";
 import RequestDetails from "./components/RequestPages/RequestDetails/RequestDetails.tsx";
+import ModerateDevsChange from "./components/ModerateDevs/ModerateDevsChange/ModerateDevsChange.tsx";
+import ModerateDevsNew from "./components/ModerateDevs/ModeratorDevsNew/ModerateDevsNew.tsx";
 
 function App() {
     const {isLoading, successText, errorText} = useAppSelector(state => state.animationReducer)
@@ -35,6 +37,8 @@ function App() {
                     <Route path="/requests" element={<CustomerRequestsTable/>}/>
                     <Route path="/requests/:request_id" element={<RequestDetails/>}/>
                     <Route path="/moderate-devs" element={<ModerateDevsTable/>}/>
+                    <Route path="/moderate-devs/new" element={<ModerateDevsNew/>}/>
+                    <Route path="/moderate-devs/:dev_id" element={<ModerateDevsChange/>}/>
                     <Route path="/register" element={<RegisterPage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>
                 </Routes>

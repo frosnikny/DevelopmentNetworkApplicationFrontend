@@ -71,6 +71,118 @@ export const getDevByUUID = (uuid: string) => async (dispatch: AppDispatch) => {
     }
 }
 
+export const updateDev = (updateDev: IDevelopmentService, image: File | undefined) => async (dispatch: AppDispatch) => {
+    interface ServerResponse {
+    }
+
+
+    const formData = new FormData();
+    if (image) {
+        formData.append('image', image);
+    }
+    console.log(image)
+    console.log(formData.get('image'))
+
+    const accessToken = Cookies.get('jwtToken')
+    const config = {
+        method: "put",
+        url: `/api/devs/${updateDev.uuid}`,
+        headers: {
+            Authorization: `Bearer ${accessToken ?? ''}`,
+        },
+        params: {
+            Title: updateDev.Title ? updateDev.Title : undefined,
+            Description: updateDev.Description ? updateDev.Description : undefined,
+            Price: updateDev.Price !== 0 ? updateDev.Price : undefined,
+            DetailedPrice: updateDev.DetailedPrice !== 0 ? updateDev.DetailedPrice : undefined,
+            Technology: updateDev.Technology ? updateDev.Technology : undefined,
+        },
+        data: formData,
+    }
+
+    try {
+        dispatch(animationSlice.actions.startLoading())
+        const response = await axios<ServerResponse>(config);
+        console.log(response)
+        // dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
+        dispatch(animationSlice.actions.finishLoading())
+    } catch (e) {
+        dispatch(animationSlice.actions.setError(`${e}`))
+    }
+}
+
+export const deleteDev = (uuid: string) => async (dispatch: AppDispatch) => {
+    interface ServerResponse {
+    }
+
+    const accessToken = Cookies.get('jwtToken')
+    const config = {
+        method: "delete",
+        url: `/api/devs/${uuid}`,
+        headers: {
+            Authorization: `Bearer ${accessToken ?? ''}`,
+        },
+    }
+
+    try {
+        dispatch(animationSlice.actions.startLoading())
+        const response = await axios<ServerResponse>(config);
+        console.log(response)
+        // dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
+        dispatch(animationSlice.actions.finishLoading())
+    } catch (e) {
+        dispatch(animationSlice.actions.setError(`${e}`))
+    }
+}
+
+export const createDev = (createDev: IDevelopmentService, image: File | undefined) => async (dispatch: AppDispatch) => {
+    interface ServerResponse {
+    }
+
+
+    const formData = new FormData();
+    if (image) {
+        formData.append('image', image);
+    }
+    if (createDev.Title) {
+        formData.append('Title', createDev.Title)
+    }
+    if (createDev.Description) {
+        formData.append('Description', createDev.Description)
+    }
+    if (createDev.Technology) {
+        formData.append('Technology', createDev.Technology)
+    }
+    if (createDev.Price !== 0) {
+        formData.append('Price', createDev.Price.toString())
+    }
+    if (createDev.DetailedPrice !== 0) {
+        formData.append('DetailedPrice', createDev.DetailedPrice.toString())
+    }
+    console.log(image)
+    console.log(formData.get('image'))
+
+    const accessToken = Cookies.get('jwtToken')
+    const config = {
+        method: "post",
+        url: `/api/devs/`,
+        headers: {
+            Authorization: `Bearer ${accessToken ?? ''}`,
+        },
+        data: formData,
+    }
+
+    try {
+        dispatch(animationSlice.actions.startLoading())
+        const response = await axios<ServerResponse>(config);
+        console.log(response)
+        // dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
+        dispatch(animationSlice.actions.finishLoading())
+    } catch (e) {
+        dispatch(animationSlice.actions.setError(`${e}`))
+    }
+}
+
 // TODO: Доделать добавление услуги в заявку
 export const addDevIntoRequest = (developmentServiceID: string) => async (dispatch: AppDispatch) => {
     interface ServerResponse {

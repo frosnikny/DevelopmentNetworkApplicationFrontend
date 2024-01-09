@@ -22,9 +22,12 @@ const DevelopmentList = () => {
         fetchData()
     }, [searchValue]);
 
+    const [isSearching, setIsSearching] = useState(true);
     const fetchData = () => {
         dispatch(fetchDevs(searchValue))
     }
+
+
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,6 +41,8 @@ const DevelopmentList = () => {
 
     return (
         <>
+            <Breadcrumbs paths={[{name: 'Главная', path: '/'}]}/>
+
             <Navbar>
                 <Form className="d-flex flex-row flex-grow-1 gap-2" onSubmit={handleSearch}>
                     <Form.Control
@@ -52,27 +57,29 @@ const DevelopmentList = () => {
                         variant="primary"
                         size="sm"
                         type="submit"
-                        className="shadow"
+                        className="shadow btn-dark"
                     >
                         Поиск
                     </Button>
                 </Form>
             </Navbar>
-            <Button
-                variant="primary"
-                onClick={didTapBasket}
-                disabled={basketID == null}
-                style={{position: 'absolute', right: 40, top: 80}}
-            >
-                Черновая заявка
-            </Button>
-            <Breadcrumbs paths={[{name: 'Главная', path: '/'}]}/>
             {devs.length == 0 && <h1>Услуг нет</h1>}
             <div className="many-cards">
                 <List items={devs} renderItem={(dev: IDevelopmentService) =>
-                    <DevelopmentItem dev={dev} key={dev.uuid}/>
+                    <DevelopmentItem dev={dev} key={dev.uuid} setIsSearching={setIsSearching}/>
                 }
                 />
+            </div>
+            <div className="fixed-bottom ms-4 mb-4">
+                <Button
+                    variant="primary"
+                    onClick={didTapBasket}
+                    disabled={basketID == null && isSearching}
+                    // style={{position: 'absolute', right: 40, top: 80}}
+                    className="btn-dark"
+                >
+                    Проверить заказ
+                </Button>
             </div>
         </>
     );

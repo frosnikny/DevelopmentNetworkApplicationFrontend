@@ -32,7 +32,7 @@ const NavigationBar = () => {
                             <Link to="/requests" className="nav-link">Заказы</Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Link to="/moderate-devs" className="nav-link">Управление видами разработок</Link>
+                            <Link to="/moderate-devs" className="nav-link">Управление видами разработки</Link>
                         </Nav.Item>
                     </Nav>
                     {jwtToken ? (

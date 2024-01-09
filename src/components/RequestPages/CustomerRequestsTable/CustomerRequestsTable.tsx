@@ -33,6 +33,11 @@ const CustomerRequestsTable = () => {
     // }, []);
     useEffect(() => {
         dispatch(fetchRequests(recordStatus, formationDateStart, formationDateEnd));
+        const fetchInterval = setInterval(() => {
+            dispatch(fetchRequests(recordStatus, formationDateStart, formationDateEnd));
+        }, 5000); // Обновлять данные каждые 5 секунд
+
+        return () => clearInterval(fetchInterval); // Очищать интервал при размонтировании компонента
     }, [recordStatus, formationDateStart, formationDateEnd, dispatch]);
 
     if (!jwtToken) {
@@ -46,23 +51,24 @@ const CustomerRequestsTable = () => {
             <Breadcrumbs paths={[{name: 'Заказы', path: '/request'}]}/>
 
             <div className="filter-container p-2 mb-2">
-                <label htmlFor="recordStatus" className="me-1">Record Status:</label>
-                <input type="text" id="recordStatus" className="me-2" value={recordStatus}
+                <label htmlFor="recordStatus" className="me-1">Номер статуса заказа:</label>
+                <input type="text" id="recordStatus" className="me-2 col-1" value={recordStatus}
                        onChange={e => setRecordStatus(e.target.value)}/>
 
-                <label htmlFor="formationDateStart" className="me-1">Formation Date Start:</label>
+                <label htmlFor="formationDateStart" className="me-1">Начальная дата формирования:</label>
                 <input type="date" id="formationDateStart" className="me-2" value={formationDateStart}
                        onChange={e => setFormationDateStart(e.target.value)}/>
 
-                <label htmlFor="formationDateEnd" className="me-1">Formation Date End:</label>
+                <label htmlFor="formationDateEnd" className="me-1">Конечная дата формирования:</label>
                 <input type="date" id="formationDateEnd" className="me-2" value={formationDateEnd}
                        onChange={e => setFormationDateEnd(e.target.value)}/>
 
-                <label htmlFor="creator" className="me-1">Creator:</label>
+                <label htmlFor="creator" className="me-1">Создатель:</label>
                 <input
                     type="text"
                     id="creator"
                     value={creatorFilter}
+                    className="col-1"
                     onChange={(e) => setCreatorFilter(e.target.value)}
                 />
             </div>
@@ -71,21 +77,26 @@ const CustomerRequestsTable = () => {
                 <Table striped bordered hover className="custom-table">
                     <thead>
                     <tr>
-                    <th>UUID</th>
-                        <th>Record Status</th>
-                        <th>Creation Date</th>
-                        <th>Formation Date</th>
-                        <th>Completion Date</th>
-                        <th>Work Specification</th>
-                        <th>Creator ID</th>
-                        <th>Moderator ID</th>
+                    <th>Статус заказа</th>
+                    <th>Дата создания</th>
+                    <th>Дата формирования</th>
+                    <th>Дата завершения</th>
+                    <th>Спецификация работы</th>
+                    <th>Создатель</th>
+                    <th>Модератор</th>
                     </tr>
                     </thead>
                     <tbody>
                     {filteredRequests.map((request, index) => (
                         <tr key={`${request.uuid}-${index}`} onClick={() => navigate(`/requests/${request.uuid}`)}>
-                            <td>{request.uuid}</td>
-                            <td>{request.record_status}</td>
+                            <td>
+                            {
+                                request.record_status === 1 ? '1) В работе' :
+                                request.record_status === 2 ? '2) Завершена' :
+                                request.record_status === 3 ? '3) Отклонена' :
+                                    'Статус неизвестен'
+                            }
+                            </td>
                             <td>{request.creation_date}</td>
                             <td>{request.formation_date}</td>
                             <td>{request.completion_date}</td>

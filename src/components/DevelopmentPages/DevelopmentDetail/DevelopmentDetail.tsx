@@ -1,7 +1,6 @@
 import {FC, useEffect} from "react";
 import {defaultImage, defaultTitle} from "../../../models/models.ts";
 import {useParams} from "react-router-dom";
-import './DevelopmentDetail.css'
 import Breadcrumbs from "../../Helpers/Breadcrumbs/Breadcrumbs.tsx";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux.ts";
 import {getDevByUUID} from "../../../store/network/ActionCreatorDevs.ts";
@@ -36,9 +35,9 @@ const DevelopmentDetail: FC = () => {
                     </div>
                     <hr/>
                     <p className="card-details__description">{dev?.Description}</p>
+                    <p className="card-details__description">Используемые технологии: {dev?.Technology}</p>
                     <div className="card-details__cost">
-                        <p><b>Детальная стоимость:</b></p>
-                        <pre>{dev?.DetailedPrice}</pre>
+                        <p><b>Цена дня работы: {dev?.DetailedPrice} ₽</b></p>
                     </div>
                 </div>
             </div>

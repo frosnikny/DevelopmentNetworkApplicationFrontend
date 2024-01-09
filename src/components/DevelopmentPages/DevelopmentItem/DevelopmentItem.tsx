@@ -7,12 +7,16 @@ import {addDevIntoRequest} from "../../../store/network/ActionCreatorDevs.ts";
 
 interface DevelopmentItemProps {
     dev: IDevelopmentService
+    setIsSearching: (value: boolean) => void;
 }
 
-const DevelopmentItem: FC<DevelopmentItemProps> = ({dev}) => {
+const DevelopmentItem: FC<DevelopmentItemProps> = ({dev, setIsSearching}) => {
     const dispatch = useAppDispatch()
     const didTapAddIntoRequest = () => {
         dispatch(addDevIntoRequest(dev.uuid))
+        .then(() => {
+            setIsSearching(false); // Устанавливаем значение в false после завершения операции
+        });
     }
 
     return (
@@ -36,7 +40,7 @@ const DevelopmentItem: FC<DevelopmentItemProps> = ({dev}) => {
                     <Link className="link-card__add" to={'/devs/' + dev.uuid}>
                         <button className="card__add">Подробнее</button>
                     </Link>
-                    <button className="card__add" onClick={didTapAddIntoRequest}>Добавить в заявку</button>
+                    <button className="card__add" onClick={didTapAddIntoRequest}>Добавить в заказ</button>
                 </div>
             </div>
         </div>

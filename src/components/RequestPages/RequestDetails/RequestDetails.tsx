@@ -32,33 +32,42 @@ const RequestDetails: FC<RequestDetailsProps> = () => {
 
     const handleDelete = (service: IDevelopmentService) => {
         dispatch(deleteDevFromRequest(request_id ?? '', service.uuid))
+            .then(() => {
+                window.location.reload(); // Устанавливаем значение в false после завершения операции
+            });
     };
 
     const handleUserConfirm = () => {
         // toast.success('Запрос отправлен');
         // console.log("toast")
         dispatch(userConfirmRequest(request_id ?? ''))
-        window.location.reload();
+            .then(() => {
+                window.location.reload(); // Устанавливаем значение в false после завершения операции
+            });
     };
 
     const handleConfirm = () => {
         dispatch(moderatorConfirmRequest(request_id ?? '', 2))
-        window.location.reload();
+            .then(() => {
+                window.location.reload(); // Устанавливаем значение в false после завершения операции
+            });
     };
 
     const handleCancel = () => {
         dispatch(moderatorConfirmRequest(request_id ?? '', 3))
-        window.location.reload();
+            .then(() => {
+                window.location.reload(); // Устанавливаем значение в false после завершения операции
+            });
     };
 
     if (!request_id) {
-        return <h1>Неверный формат заявки</h1>
+        return <h1>Неверный формат заказа</h1>
     }
 
     return (
         <>
             <Breadcrumbs paths={[
-                {name: 'Заявки', path: '/requests'},
+                {name: 'Заказы', path: '/requests'},
                 {name: `${request?.uuid}`, path: `/requests/${request_id}`}
             ]}/>
 
@@ -66,16 +75,23 @@ const RequestDetails: FC<RequestDetailsProps> = () => {
                 <div className="row">
                     <div className="card bg-dark text-white">
                         <div className="card-header">
-                            <h2>Request Information</h2>
+                            <h2>Информация о заказе</h2>
                         </div>
                         <div className="card-body">
-                            <p>UUID: {request?.uuid}</p>
-                            <p>Record Status: {request?.record_status}</p>
-                            <p>Creation Date: {request?.creation_date}</p>
-                            <p>Formation Date: {request?.formation_date}</p>
-                            <p>Work Specification: {request?.work_specification}</p>
-                            <p>Moderator: {request?.moderator}</p>
-                            <p>Creator: {request?.creator}</p>
+                            {/*<p>UUID: {request?.uuid}</p>*/}
+                            <p>Статус заказа: {
+                                request?.record_status === 0 ? '0) Составляется' :
+                                request?.record_status === 1 ? '1) В работе' :
+                                    request?.record_status === 2 ? '2) Завершена' :
+                                        request?.record_status === 3 ? '3) Отклонена' :
+                                            'Статус неизвестен'
+                            }</p>
+                            <p>Дата создания: {request?.creation_date || 'отсутствует'}</p>
+                            <p>Дата формирования: {request?.formation_date || 'отсутствует'}</p>
+                            <p>Дата завершения: {request?.completion_date || 'отсутствует'}</p>
+                            <p>Спецификация работы: {request?.work_specification || 'отсутствует'}</p>
+                            <p>Создатель: {request?.creator || 'отсутствует'}</p>
+                            <p>Модератор: {request?.moderator || 'отсутствует'}</p>
                         </div>
                         <div className="card-buttons ms-3 mb-4">
                             {cookies.role && (cookies.role === 1 || cookies.role === 2) && request?.record_status === 0 && (
@@ -109,20 +125,19 @@ const RequestDetails: FC<RequestDetailsProps> = () => {
                 <div className="row mt-4">
                     <div className="card bg-dark text-white">
                         <div className="card-header">
-                            <h2>Service Requests</h2>
+                            <h2>Виды разработки в заказе</h2>
                         </div>
                         <div className="card-body">
                             <table className="table table-dark">
                                 <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
-                                    <th>Price</th>
-                                    <th>Record Status</th>
-                                    <th>Technology</th>
-                                    <th>Detailed Price</th>
-                                    <th>Action</th>
+                                    <th>Название</th>
+                                    <th>Описание</th>
+                                    <th>Изображение</th>
+                                    <th>Начальная стоимость</th>
+                                    <th>Технологии</th>
+                                    <th>Цена за день</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -139,7 +154,6 @@ const RequestDetails: FC<RequestDetailsProps> = () => {
                                             backgroundRepeat: "no-repeat"
                                         }}/></td>
                                         <td>{serviceRequest.Price}</td>
-                                        <td>{serviceRequest.RecordStatus}</td>
                                         <td>{serviceRequest.Technology}</td>
                                         <td>{serviceRequest.DetailedPrice}</td>
                                         <td>
@@ -147,7 +161,7 @@ const RequestDetails: FC<RequestDetailsProps> = () => {
                                                 className="btn btn-danger"
                                                 onClick={() => handleDelete(serviceRequest)}
                                             >
-                                                Delete
+                                                Удалить
                                             </button>
                                         </td>
                                     </tr>

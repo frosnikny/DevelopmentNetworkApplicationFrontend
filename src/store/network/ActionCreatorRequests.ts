@@ -97,7 +97,8 @@ export const deleteDevFromRequest = (requestUUID: string, devUUID: string) => as
         console.log(response)
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка удаления из корзины`))
     }
 }
 
@@ -123,7 +124,8 @@ export const userConfirmRequest = (requestUUID: string) => async (dispatch: AppD
         console.log(response)
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка подтверждения заказа`))
     }
 }
 
@@ -146,7 +148,8 @@ export const deleteDraftRequest = (requestUUID: string) => async (dispatch: AppD
         console.log(response)
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка удаления заказа`))
     }
 }
 
@@ -173,7 +176,8 @@ export const moderatorConfirmRequest = (requestUUID: string, status: number) => 
         console.log(response)
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка подтверждения заказа`))
     }
 }
 
@@ -199,7 +203,8 @@ export const requestSpecSave = (requestUUID: string, workSpec: string) => async 
         console.log(response)
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка сохранения спецификации`))
     }
 }
 
@@ -225,6 +230,7 @@ export const requestScopeSave = (requestUUID: string, devId: string, workScope: 
         console.log(response)
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка сохранения описания`))
     }
 }

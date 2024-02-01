@@ -68,7 +68,8 @@ export const getDevByUUID = (uuid: string) => async (dispatch: AppDispatch) => {
         dispatch(devsSlice.actions.setDev(response.data))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        // dispatch(animationSlice.actions.setError(`Ошибка нахождения услуги по разработке`))
         dispatch(devsSlice.actions.setDev(mockByUUID(uuid)!))
     }
 }
@@ -107,7 +108,8 @@ export const updateDev = (updateDev: IDevelopmentService, image: File | undefine
         // dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка удаления услуги по разработке`))
     }
 }
 
@@ -131,7 +133,8 @@ export const deleteDev = (uuid: string) => async (dispatch: AppDispatch) => {
         // dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка удаления услуги по разработке`))
     }
 }
 
@@ -179,7 +182,8 @@ export const createDev = (createDev: IDevelopmentService, image: File | undefine
         // dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка создания услуги по разработке`))
     }
 }
 
@@ -203,7 +207,8 @@ export const addDevIntoRequest = (developmentServiceID: string) => async (dispat
         dispatch(animationSlice.actions.setSuccess(`${developmentServiceID} Успешно добавлен в заявку`))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка добавления услуги по разработке в корзину`))
     }
 }
 

@@ -1,9 +1,11 @@
-body {
-    background-color: #2D384A;
-}
+/*body {*/
+/*    background-color: #a4a4a7;*/
+/*}*/
 
 .many-cards .card {
     margin: 10px;
+    background-color: #f2f2f2;
+    border: 2px black;
 }
 
 header {
@@ -116,10 +118,14 @@ header {
     position: relative;
 }
 
+.card__price {
+    color: black;
+}
+
 .card__price--discount {
     font-weight: 700;
     font-size: 19px;
-    color: #e0e0e0;
+    color: black;
     display: flex;
     flex-wrap: wrap-reverse;
 }
@@ -137,7 +143,7 @@ header {
     font-weight: 400;
     font-size: 17px;
     line-height: 150%;
-    color: #e0e0e0;
+    color: #0c0c0c;
 }
 
 .card__title:hover {
@@ -158,6 +164,15 @@ header {
     cursor: pointer;
     transition: 0.2s;
     margin-top: auto;
+    margin-bottom: 12px;
+}
+
+.my-reset link {
+    /* Reset label styles */
+}
+
+.link-card__add {
+    text-decoration: none;
 }
 
 .card__add:hover {

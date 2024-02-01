@@ -1,11 +1,11 @@
 body {
-    background-color: #2D384A;
+    /*background-color: #2D384A;*/
     margin: 0px;
     padding: 0px;
 }
 
 .card-details {
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 4px;
     padding: 20px;
     margin: 20px;
@@ -36,13 +36,13 @@ body {
     font-weight: 400;
     font-size: 24px;
     margin-bottom: 0;
-    color: #e0e0e0;
+    color: #0c0c0c;
 }
 
 .card-details__description {
     font-size: 19px;
     line-height: 150%;
-    color: #e0e0e0;
+    color: #0c0c0c;
     margin-bottom: 20px;
     overflow-wrap: anywhere;
 
@@ -57,7 +57,7 @@ body {
 .card-details__price {
     font-size: 20px;
     font-style: italic;
-    color: rgb(161, 161, 161);
+    color: black;
 }
 
 .card-details__price::after {
@@ -73,7 +73,7 @@ hr {
 
 .card-details__cost {
     font-size: 18px;
-    color: #e0e0e0;
+    color: black;
     margin-top: 20px;
 }
 

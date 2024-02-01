@@ -13,7 +13,6 @@ export const fetchDevs = (filter?: string, makeLoading: boolean = true) => async
     }
 
     const accessToken = Cookies.get('jwtToken')
-    console.log(accessToken)
     // dispatch(userSlice.actions.setAuthStatus(accessToken != null && accessToken != ""));
     const config = {
         method: "get",
@@ -28,6 +27,7 @@ export const fetchDevs = (filter?: string, makeLoading: boolean = true) => async
             dispatch(animationSlice.actions.startLoading())
         }
         const response = await axios<ServerResponse>(config);
+        console.log(response)
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -43,8 +43,10 @@ export const fetchDevs = (filter?: string, makeLoading: boolean = true) => async
         dispatch(devsSlice.actions.setBasketID(draftCustomerRequestUuid));
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        // dispatch(animationSlice.actions.setError(`${e}`))
         dispatch(devsSlice.actions.setDevs(filterMock(filter)))
+        dispatch(animationSlice.actions.finishLoading())
     }
 }
 
@@ -62,7 +64,7 @@ export const getDevByUUID = (uuid: string) => async (dispatch: AppDispatch) => {
     try {
         dispatch(animationSlice.actions.startLoading())
         const response = await axios<IDevelopmentService>(config);
-
+        console.log(response)
         dispatch(devsSlice.actions.setDev(response.data))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
@@ -80,8 +82,6 @@ export const updateDev = (updateDev: IDevelopmentService, image: File | undefine
     if (image) {
         formData.append('image', image);
     }
-    console.log(image)
-    console.log(formData.get('image'))
 
     const accessToken = Cookies.get('jwtToken')
     const config = {
@@ -183,7 +183,6 @@ export const createDev = (createDev: IDevelopmentService, image: File | undefine
     }
 }
 
-// TODO: Доделать добавление услуги в заявку
 export const addDevIntoRequest = (developmentServiceID: string) => async (dispatch: AppDispatch) => {
     interface ServerResponse {
     }

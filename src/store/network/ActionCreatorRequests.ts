@@ -41,10 +41,13 @@ export const fetchRequests = (recordStatus: string, formationDateStart: string, 
 
         const response = await axios<ServerResponse>(config);
         console.log(response.data.customer_requests)
+        console.log(response)
         dispatch(requestSlice.actions.setRequests(response.data.customer_requests))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.finishLoading())
+        // dispatch(animationSlice.actions.setError(`${e}`))
     }
 }
 
@@ -65,14 +68,16 @@ export const fetchRequestByUUID = (uuid: string) => async (dispatch: AppDispatch
     try {
         dispatch(animationSlice.actions.startLoading())
         const response = await axios<ServerResponse>(config);
+        console.log(response)
         dispatch(requestSlice.actions.setRequest(response.data.customer_request))
         dispatch(animationSlice.actions.finishLoading())
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка просмотра заявки`))
+        dispatch(animationSlice.actions.finishLoading())
     }
 }
 
-// TODO: Доделать метод удаления услуги из заявки
 export const deleteDevFromRequest = (requestUUID: string, devUUID: string) => async (dispatch: AppDispatch) => {
     interface ServerResponse {
     }
@@ -122,6 +127,29 @@ export const userConfirmRequest = (requestUUID: string) => async (dispatch: AppD
     }
 }
 
+export const deleteDraftRequest = (requestUUID: string) => async (dispatch: AppDispatch) => {
+    interface ServerResponse {
+    }
+
+    const accessToken = Cookies.get('jwtToken')
+    const config = {
+        method: "delete",
+        url: `/api/requests/${requestUUID}`,
+        headers: {
+            Authorization: `Bearer ${accessToken ?? ''}`,
+        },
+    }
+
+    try {
+        dispatch(animationSlice.actions.startLoading())
+        const response = await axios<ServerResponse>(config);
+        console.log(response)
+        dispatch(animationSlice.actions.finishLoading())
+    } catch (e) {
+        dispatch(animationSlice.actions.setError(`${e}`))
+    }
+}
+
 export const moderatorConfirmRequest = (requestUUID: string, status: number) => async (dispatch: AppDispatch) => {
     interface ServerResponse {
     }
@@ -136,6 +164,58 @@ export const moderatorConfirmRequest = (requestUUID: string, status: number) => 
         params: {
             confirm: true,
             status: status,
+        }
+    }
+
+    try {
+        dispatch(animationSlice.actions.startLoading())
+        const response = await axios<ServerResponse>(config);
+        console.log(response)
+        dispatch(animationSlice.actions.finishLoading())
+    } catch (e) {
+        dispatch(animationSlice.actions.setError(`${e}`))
+    }
+}
+
+export const requestSpecSave = (requestUUID: string, workSpec: string) => async (dispatch: AppDispatch) => {
+    interface ServerResponse {
+    }
+
+    const accessToken = Cookies.get('jwtToken')
+    const config = {
+        method: "put",
+        url: `/api/requests/${requestUUID}/update`,
+        headers: {
+            Authorization: `Bearer ${accessToken ?? ''}`,
+        },
+        params: {
+            work_specification: workSpec,
+        }
+    }
+
+    try {
+        dispatch(animationSlice.actions.startLoading())
+        const response = await axios<ServerResponse>(config);
+        console.log(response)
+        dispatch(animationSlice.actions.finishLoading())
+    } catch (e) {
+        dispatch(animationSlice.actions.setError(`${e}`))
+    }
+}
+
+export const requestScopeSave = (requestUUID: string, devId: string, workScope: string) => async (dispatch: AppDispatch) => {
+    interface ServerResponse {
+    }
+
+    const accessToken = Cookies.get('jwtToken')
+    const config = {
+        method: "put",
+        url: `/api/requests/${requestUUID}/change_scope/${devId}`,
+        headers: {
+            Authorization: `Bearer ${accessToken ?? ''}`,
+        },
+        params: {
+            work_scope: workScope,
         }
     }
 

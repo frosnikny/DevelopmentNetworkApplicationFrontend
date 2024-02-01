@@ -16,12 +16,6 @@ const ModerateDevsTable = () => {
     // const jwtToken = Cookies.get('jwtToken')
     const role_cookie = Cookies.get('role')
 
-    if (role_cookie !== '2') {
-        return <Link to="/login">
-            <button className="btn btn-danger mt-3">Доступно только модераторам</button>
-        </Link>
-    }
-
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const {searchValue} = useAppSelector(state => state.progressReducer)
@@ -29,8 +23,16 @@ const ModerateDevsTable = () => {
     const [searchText, setSearchText] = useState(searchValue)
 
     useEffect(() => {
-        fetchData()
+        if (role_cookie && role_cookie === '2') {
+            fetchData()
+        }
     }, [searchValue]);
+
+    if (!role_cookie || role_cookie !== '2') {
+        return <Link to="/login">
+            <button className="btn btn-danger mt-3">Доступно только модераторам</button>
+        </Link>
+    }
 
     const fetchData = () => {
         dispatch(fetchDevs(searchValue))
@@ -38,7 +40,6 @@ const ModerateDevsTable = () => {
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(searchText)
         dispatch(progressSlice.actions.setSearch(searchText))
     }
 

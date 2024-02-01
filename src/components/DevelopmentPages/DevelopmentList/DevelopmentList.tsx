@@ -17,12 +17,13 @@ const DevelopmentList = () => {
     const {searchValue} = useAppSelector(state => state.progressReducer)
     const {devs, basketID} = useAppSelector(state => state.devsReducer)
     const [searchText, setSearchText] = useState(searchValue)
+    // const [draft, setDraft] = useState<string | null>(null)
 
     useEffect(() => {
         fetchData()
-    }, [searchValue]);
+    }, [searchValue, basketID]);
 
-    const [isSearching, setIsSearching] = useState(true);
+    // const [isSearching, setIsSearching] = useState(true);
     const fetchData = () => {
         dispatch(fetchDevs(searchValue))
     }
@@ -31,7 +32,6 @@ const DevelopmentList = () => {
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(searchText)
         dispatch(progressSlice.actions.setSearch(searchText))
     }
 
@@ -41,7 +41,7 @@ const DevelopmentList = () => {
 
     return (
         <>
-            <Breadcrumbs paths={[{name: 'Главная', path: '/'}]}/>
+            <Breadcrumbs paths={[{name: 'Виды разработки', path: '/'}]}/>
 
             <Navbar>
                 <Form className="d-flex flex-row flex-grow-1 gap-2" onSubmit={handleSearch}>
@@ -66,7 +66,7 @@ const DevelopmentList = () => {
             {devs.length == 0 && <h1>Услуг нет</h1>}
             <div className="many-cards">
                 <List items={devs} renderItem={(dev: IDevelopmentService) =>
-                    <DevelopmentItem dev={dev} key={dev.uuid} setIsSearching={setIsSearching}/>
+                    <DevelopmentItem dev={dev} key={dev.uuid}/>
                 }
                 />
             </div>
@@ -74,8 +74,7 @@ const DevelopmentList = () => {
                 <Button
                     variant="primary"
                     onClick={didTapBasket}
-                    disabled={basketID == null && isSearching}
-                    // style={{position: 'absolute', right: 40, top: 80}}
+                    disabled={!basketID}
                     className="btn-dark"
                 >
                     Проверить заказ

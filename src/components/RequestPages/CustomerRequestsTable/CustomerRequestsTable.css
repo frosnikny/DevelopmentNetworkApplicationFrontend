@@ -16,15 +16,18 @@
 
     th {
         background-color: #343a40;
-        color: #ffffff;
+        /*color: #ffffff;*/
+        color: #b70000;
     }
 
     tbody tr:nth-child(even) {
         background-color: #f8f9fa;
+        /*background-color: #0081ff;*/
     }
 
     tbody tr:hover {
         background-color: #e2e6ea;
+        /*background-color: #0081ff;*/
     }
 
     td {

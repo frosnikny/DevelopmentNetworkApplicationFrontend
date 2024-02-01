@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Cookies from "js-cookie";
 import {Button, FormLabel} from "react-bootstrap";
 // import {defaultImage} from "../models/models.ts";
+import "./NavBar.css"
 
 const NavigationBar = () => {
     const jwtToken = Cookies.get('jwtToken')
@@ -68,7 +69,7 @@ const NavigationBar = () => {
                             </Nav>
                             <Nav className="ms-2">
                                 <Nav.Item>
-                                    <Link to="/register" className="btn btn-outline-info">
+                                    <Link to="/register" className="btn btn-orange">
                                         Регистрация
                                     </Link>
                                 </Nav.Item>

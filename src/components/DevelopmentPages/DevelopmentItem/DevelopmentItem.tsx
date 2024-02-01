@@ -2,21 +2,27 @@ import {FC} from 'react';
 import {defaultImage, defaultTitle, IDevelopmentService} from "../../../models/models.ts";
 import './DevelopmentItem.css'
 import {Link} from 'react-router-dom';
-import {useAppDispatch} from "../../../hooks/redux.ts";
-import {addDevIntoRequest} from "../../../store/network/ActionCreatorDevs.ts";
+import {useAppDispatch, useAppSelector} from "../../../hooks/redux.ts";
+import {addDevIntoRequest, fetchDevs} from "../../../store/network/ActionCreatorDevs.ts";
+
 
 interface DevelopmentItemProps {
     dev: IDevelopmentService
-    setIsSearching: (value: boolean) => void;
 }
 
-const DevelopmentItem: FC<DevelopmentItemProps> = ({dev, setIsSearching}) => {
+const DevelopmentItem: FC<DevelopmentItemProps> = ({dev}) => {
     const dispatch = useAppDispatch()
+    const {searchValue} = useAppSelector(state => state.progressReducer)
+    // const [basketID] = useAppSelector(state => state.devsReducer)
     const didTapAddIntoRequest = () => {
-        dispatch(addDevIntoRequest(dev.uuid))
-        .then(() => {
-            setIsSearching(false); // Устанавливаем значение в false после завершения операции
-        });
+        dispatch(addDevIntoRequest(dev.uuid)).then(()=>{fetchData()})
+    }
+
+    const fetchData = () => {
+        dispatch(fetchDevs(searchValue))
+        // .then(() => {
+        //     setDraft(basketID)
+        // })
     }
 
     return (
@@ -37,7 +43,7 @@ const DevelopmentItem: FC<DevelopmentItemProps> = ({dev, setIsSearching}) => {
                     {dev.Title || defaultTitle}
                 </Link>
                 <div className="card__buttons">
-                    <Link className="link-card__add" to={'/devs/' + dev.uuid}>
+                    <Link className="link-card__add my-reset" to={'/devs/' + dev.uuid}>
                         <button className="card__add">Подробнее</button>
                     </Link>
                     <button className="card__add" onClick={didTapAddIntoRequest}>Добавить в заказ</button>

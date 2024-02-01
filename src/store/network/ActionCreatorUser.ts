@@ -26,7 +26,9 @@ export const registerUser = (
         console.log(response)
         dispatch(animationSlice.actions.setSuccess('Вы успешно зарегистрировались'))
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError('Ошибка регистрации'))
+        dispatch(animationSlice.actions.finishLoading())
     }
 }
 
@@ -51,7 +53,7 @@ export const loginUser = (
     try {
         dispatch(animationSlice.actions.startLoading())
         const response = await axios<ServerResponse>(config);
-
+        console.log(response)
         // const secret = 'peppa'; // секретный ключ
         // //
         // // // получение роли из расшифрованного токена
@@ -73,6 +75,8 @@ export const loginUser = (
         Cookies.set('role', response.data.role.toString())
         dispatch(animationSlice.actions.setSuccess('Успешный вход'))
     } catch (e) {
-        dispatch(animationSlice.actions.setError(`${e}`))
+        console.log(e)
+        dispatch(animationSlice.actions.setError(`Ошибка входа`))
+        dispatch(animationSlice.actions.finishLoading())
     }
 }

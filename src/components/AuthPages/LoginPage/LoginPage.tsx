@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux.ts";
+import {useAppDispatch} from "../../../hooks/redux.ts";
 import {useNavigate} from "react-router-dom";
 import {loginUser} from "../../../store/network/ActionCreatorUser.ts";
 import Cookies from "js-cookie";
@@ -15,7 +15,7 @@ const LoginPage: FC<LoginPageProps> = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
     const jwtToken = Cookies.get('jwtToken')
-    const {errorText} = useAppSelector(state => state.animationReducer)
+    // const {errorText} = useAppSelector(state => state.animationReducer)
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
@@ -36,10 +36,10 @@ const LoginPage: FC<LoginPageProps> = () => {
             <Container>
                 <Row className="justify-content-center">
                     <Col md={5}>
-                        <label className="link-danger text-wrong-password">
-                            {errorText}
-                        </label>
-                        <div className="bg-dark p-4 rounded">
+                        {/*<label className="link-danger text-wrong-password">*/}
+                        {/*    {errorText}*/}
+                        {/*</label>*/}
+                        <div className="bg-dark p-4 rounded mt-3">
                             <h2 className="text-center mb-4" style={{color: 'white'}}>Авторизация</h2>
                             <Form.Label className="font-weight-bold text-left">Логин</Form.Label>
                             <Form.Control

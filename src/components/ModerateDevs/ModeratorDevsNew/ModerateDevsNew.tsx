@@ -38,7 +38,9 @@ const ModerateDevsNew: FC = () => {
             Title: title || "",
             Price: price || 0,
             Description: description || "",
-            DetailedPrice: detailedPrice || 0 };
+            DetailedPrice: detailedPrice || 0,
+            ServiceRequest: null
+        };
         dispatch(createDev(updatedDev, image));
         // console.log(updatedDev)
     };

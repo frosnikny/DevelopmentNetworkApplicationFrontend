@@ -20,7 +20,7 @@ const DevelopmentDetail: FC = () => {
     return (
         <>
             <Breadcrumbs paths={[
-                {name: 'Главная', path: '/'},
+                {name: 'Виды разработки', path: '/'},
                 {name: `${dev?.Title || defaultTitle}`, path: `${dev_id}`}
             ]}/>
 

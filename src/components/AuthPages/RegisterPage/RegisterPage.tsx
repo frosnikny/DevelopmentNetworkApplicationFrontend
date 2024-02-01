@@ -27,7 +27,6 @@ const RegisterPage: FC<RegisterPageProps> = () => {
     };
 
     if (jwtToken) {
-        console.log(jwtToken)
         navigate('/devs')
     }
 

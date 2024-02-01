@@ -58,7 +58,9 @@ const ModerateDevsChange: FC = () => {
             Title: title || "",
             Price: price || 0,
             Description: description || "",
-            DetailedPrice: detailedPrice || 0 };
+            DetailedPrice: detailedPrice || 0,
+            ServiceRequest: null,
+        };
         dispatch(updateDev(updatedDev, image));
         // console.log(updatedDev)
     };

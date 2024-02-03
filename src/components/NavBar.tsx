@@ -10,6 +10,7 @@ const NavigationBar = () => {
     const jwtToken = Cookies.get('jwtToken')
     // const userImage = Cookies.get('userImage')
     const login = Cookies.get('login')
+    const role = Cookies.get('role')
 
     const handleLogout = () => {
         const allCookies = Cookies.get();
@@ -29,12 +30,16 @@ const NavigationBar = () => {
                         <Nav.Item className="me-3">
                             <Link to="/devs" className="nav-link ps-0">Виды разработки</Link>
                         </Nav.Item>
+                        { (role == "1" || role == "2") && (
                         <Nav.Item className="me-3">
                             <Link to="/requests" className="nav-link">Заказы</Link>
                         </Nav.Item>
+                        )}
+                        { (role == "2") && (
                         <Nav.Item>
                             <Link to="/moderate-devs" className="nav-link">Управление видами разработки</Link>
                         </Nav.Item>
+                        )}
                     </Nav>
                     {jwtToken ? (
                         <>

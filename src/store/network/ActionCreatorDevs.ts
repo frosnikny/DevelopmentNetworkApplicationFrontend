@@ -98,7 +98,7 @@ export const updateDev = (updateDev: IDevelopmentService, image: File | undefine
             DetailedPrice: updateDev.DetailedPrice !== 0 ? updateDev.DetailedPrice : undefined,
             Technology: updateDev.Technology ? updateDev.Technology : undefined,
         },
-        data: formData,
+        // data: formData,
     }
 
     try {

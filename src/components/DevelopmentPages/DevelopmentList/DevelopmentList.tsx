@@ -10,6 +10,7 @@ import Breadcrumbs from "../../Helpers/Breadcrumbs/Breadcrumbs.tsx";
 import {progressSlice} from "../../../store/reducers/ProgressState.ts";
 import {fetchDevs} from "../../../store/network/ActionCreatorDevs.ts";
 import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 const DevelopmentList = () => {
     const dispatch = useAppDispatch()
@@ -17,6 +18,7 @@ const DevelopmentList = () => {
     const {searchValue} = useAppSelector(state => state.progressReducer)
     const {devs, basketID} = useAppSelector(state => state.devsReducer)
     const [searchText, setSearchText] = useState(searchValue)
+    const role = Cookies.get('role')
     // const [draft, setDraft] = useState<string | null>(null)
 
     useEffect(() => {
@@ -70,6 +72,7 @@ const DevelopmentList = () => {
                 }
                 />
             </div>
+            { (role == "1" || role == "2") && (
             <div className="fixed-bottom ms-4 mb-4">
                 <Button
                     variant="primary"
@@ -80,6 +83,7 @@ const DevelopmentList = () => {
                     Проверить заказ
                 </Button>
             </div>
+            )}
         </>
     );
 };

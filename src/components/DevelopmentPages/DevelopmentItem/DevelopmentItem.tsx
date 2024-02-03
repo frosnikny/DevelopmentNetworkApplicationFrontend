@@ -4,6 +4,7 @@ import './DevelopmentItem.css'
 import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux.ts";
 import {addDevIntoRequest, fetchDevs} from "../../../store/network/ActionCreatorDevs.ts";
+import Cookies from "js-cookie";
 
 
 interface DevelopmentItemProps {
@@ -13,6 +14,7 @@ interface DevelopmentItemProps {
 const DevelopmentItem: FC<DevelopmentItemProps> = ({dev}) => {
     const dispatch = useAppDispatch()
     const {searchValue} = useAppSelector(state => state.progressReducer)
+    const role = Cookies.get('role')
     // const [basketID] = useAppSelector(state => state.devsReducer)
     const didTapAddIntoRequest = () => {
         dispatch(addDevIntoRequest(dev.uuid)).then(()=>{fetchData()})
@@ -46,7 +48,9 @@ const DevelopmentItem: FC<DevelopmentItemProps> = ({dev}) => {
                     <Link className="link-card__add my-reset" to={'/devs/' + dev.uuid}>
                         <button className="card__add">Подробнее</button>
                     </Link>
+                    { (role == "1" || role == "2") && (
                     <button className="card__add" onClick={didTapAddIntoRequest}>Добавить в заказ</button>
+                    )}
                 </div>
             </div>
         </div>

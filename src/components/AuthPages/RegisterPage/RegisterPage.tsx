@@ -64,7 +64,7 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                         <Button
                             variant="primary"
                             type="submit"
-                            className="w-100 mt-4"
+                            className="w-100 mt-4 btn-secondary"
                             onClick={handleRegister}
                             style={{borderRadius: '10px'}}
                         >

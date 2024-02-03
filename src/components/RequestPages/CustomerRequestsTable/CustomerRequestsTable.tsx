@@ -10,7 +10,6 @@ import {
 } from "../../../store/network/ActionCreatorRequests.ts";
 import Cookies from "js-cookie";
 import {useCookies} from "react-cookie";
-import {Button} from "react-bootstrap";
 import {progressSlice} from "../../../store/reducers/ProgressState.ts";
 
 const CustomerRequestsTable = () => {
@@ -40,6 +39,22 @@ const CustomerRequestsTable = () => {
         }
     }, [requests, creatorFilterValue]);
 
+    useEffect(() => {
+        dispatch(progressSlice.actions.setRecordStatusValue(recordStatus))
+    }, [recordStatus]);
+
+    useEffect(() => {
+        dispatch(progressSlice.actions.setFormationDateStartValue(formationDateStart))
+    }, [formationDateStart]);
+
+    useEffect(() => {
+        dispatch(progressSlice.actions.setFormationDateEndValue(formationDateEnd))
+    }, [formationDateEnd]);
+
+    useEffect(() => {
+        dispatch(progressSlice.actions.setCreatorFilterValue(creatorFilter))
+    }, [creatorFilter]);
+
     // useEffect(() => {
     //     dispatch(fetchRequests())
     // }, []);
@@ -56,13 +71,6 @@ const CustomerRequestsTable = () => {
         return <Link to="/login">
             <button className="btn btn-danger mt-3">Требуется авторизоваться</button>
         </Link>
-    }
-
-    const handleFilters = () => {
-        dispatch(progressSlice.actions.setRecordStatusValue(recordStatus))
-        dispatch(progressSlice.actions.setFormationDateStartValue(formationDateStart))
-        dispatch(progressSlice.actions.setFormationDateEndValue(formationDateEnd))
-        dispatch(progressSlice.actions.setCreatorFilterValue(creatorFilter))
     }
 
     const handleConfirm = (uuid: string) => {
@@ -112,15 +120,15 @@ const CustomerRequestsTable = () => {
                 )}
                 </div>
 
-                <Button
-                    variant="primary"
-                    size="sm"
-                    type="submit"
-                    className="btn-primary btn-dark col-1"
-                    onClick={handleFilters}
-                >
-                    Применить
-                </Button>
+                {/*<Button*/}
+                {/*    variant="primary"*/}
+                {/*    size="sm"*/}
+                {/*    type="submit"*/}
+                {/*    className="btn-primary btn-dark col-1"*/}
+                {/*    onClick={handleFilters}*/}
+                {/*>*/}
+                {/*    Применить*/}
+                {/*</Button>*/}
 
             </div>
 
